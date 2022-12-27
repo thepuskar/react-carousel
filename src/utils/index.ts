@@ -1,25 +1,25 @@
-import { MouseEvent, TouchEvent } from 'react';
-import { SlideDirection, Item, GetShowArrowProps } from 'interfaces';
+import { MouseEvent, TouchEvent } from 'react'
+import { SlideDirection, Item } from 'interfaces'
 
 export class Circular<T> {
   constructor(private arr: T[], private currentIndex: number) {}
 
   next(): T {
-    const i = this.currentIndex;
-    const arr = this.arr;
-    this.currentIndex = i < arr.length - 1 ? i + 1 : 0;
-    return this.current();
+    const i = this.currentIndex
+    const arr = this.arr
+    this.currentIndex = i < arr.length - 1 ? i + 1 : 0
+    return this.current()
   }
 
   prev(): T {
-    const i = this.currentIndex;
-    const arr = this.arr;
-    this.currentIndex = i > 0 && i < arr.length ? i - 1 : arr.length - 1;
-    return this.current();
+    const i = this.currentIndex
+    const arr = this.arr
+    this.currentIndex = i > 0 && i < arr.length ? i - 1 : arr.length - 1
+    return this.current()
   }
 
   current(): T {
-    return this.arr[this.currentIndex];
+    return this.arr[this.currentIndex]
   }
 }
 
@@ -31,38 +31,38 @@ export const rotateItems = (
   slide: number,
   direction: SlideDirection
 ): any[] => {
-  const circular = new Circular(items, start);
-  const newItems: any[] = Array.from(showingItems);
+  const circular = new Circular(items, start)
+  const newItems: any[] = Array.from(showingItems)
 
   switch (+direction) {
     case SlideDirection.Left:
       for (let i = slide; i >= 0; i--) {
         if (slide - i < 0 || !newItems[i - slide]) {
-          newItems.unshift(circular.current());
+          newItems.unshift(circular.current())
         }
-        circular.prev();
+        circular.prev()
       }
-      break;
+      break
     case SlideDirection.Right:
       for (let i = 0; i < show + slide; i++) {
         if (!newItems[2 * slide + i]) {
-          newItems.push(circular.current());
+          newItems.push(circular.current())
         }
-        circular.next();
+        circular.next()
       }
-      break;
+      break
   }
 
-  return newItems;
-};
+  return newItems
+}
 
 export const getTransformAmount = (
   width: number,
   slideCount: number,
   direction: SlideDirection
 ): number => {
-  return direction * width * slideCount;
-};
+  return direction * width * slideCount
+}
 
 export const getCurrent = (
   current: number,
@@ -70,15 +70,23 @@ export const getCurrent = (
   length: number,
   direction: SlideDirection
 ) => {
-  const slideTo = current - direction * slide;
+  const slideTo = current - direction * slide
   if (slideTo < 0) {
-    return length + slideTo;
+    return length + slideTo
   } else if (length <= slideTo) {
-    return slideTo - length;
+    return slideTo - length
   }
 
-  return slideTo;
-};
+  return slideTo
+}
+
+interface GetShowArrowProps {
+  itemCount: number
+  itemsToShow: number
+  infinite: boolean
+  current: number
+  hideArrows: boolean
+}
 
 export const getShowArrow = (
   props: GetShowArrowProps
@@ -88,30 +96,30 @@ export const getShowArrow = (
     itemsToShow,
     infinite,
     current,
-    hideArrows = false,
-  } = props;
+    hideArrows = false
+  } = props
 
   if (hideArrows) {
     return {
       left: false,
-      right: false,
-    };
+      right: false
+    }
   }
 
-  const hasMoreItems = itemCount > itemsToShow;
+  const hasMoreItems = itemCount > itemsToShow
 
   if (infinite) {
     return {
       left: hasMoreItems,
-      right: hasMoreItems,
-    };
+      right: hasMoreItems
+    }
   }
 
   return {
     left: hasMoreItems && current !== 0,
-    right: hasMoreItems && current + itemsToShow < itemCount,
-  };
-};
+    right: hasMoreItems && current + itemsToShow < itemCount
+  }
+}
 
 export const cleanItems = (
   showingItems: any[],
@@ -119,10 +127,10 @@ export const cleanItems = (
   direction: SlideDirection
 ): any[] => {
   if (direction === SlideDirection.Left) {
-    return showingItems.slice(0, -1 * slide);
+    return showingItems.slice(0, -1 * slide)
   }
-  return showingItems.slice(slide);
-};
+  return showingItems.slice(slide)
+}
 
 export const cleanNavigationItems = (
   showingItems: any[],
@@ -130,11 +138,11 @@ export const cleanNavigationItems = (
   direction: SlideDirection
 ): any[] => {
   if (direction === SlideDirection.Left) {
-    return showingItems.slice(0, slide);
+    return showingItems.slice(0, slide)
   }
 
-  return showingItems.slice(slide);
-};
+  return showingItems.slice(slide)
+}
 
 export const initItems = (
   items: Item[],
@@ -142,35 +150,35 @@ export const initItems = (
   infinite: boolean
 ): Item[] => {
   if (!infinite) {
-    return items;
+    return items
   }
 
-  const newArray = Array.from(items);
-  const circular = new Circular(items, 0);
+  const newArray = Array.from(items)
+  const circular = new Circular(items, 0)
   for (let i = 0; i < slide; i++) {
-    newArray.unshift(circular.prev());
+    newArray.unshift(circular.prev())
   }
 
-  return newArray;
-};
+  return newArray
+}
 
-export function getPageX(e: TouchEvent | MouseEvent): number {
+export function getPageX(e: TouchEvent | MouseEvent | undefined | any): number {
   if (e.nativeEvent instanceof MouseEvent) {
-    return e.nativeEvent.pageX;
+    return e.nativeEvent.pageX
   } else if (e.nativeEvent instanceof TouchEvent) {
-    return e.nativeEvent.changedTouches[0].pageX;
+    return e.nativeEvent.changedTouches[0].pageX
   }
-  return 0;
+  return 0
 }
 
 export function getOuterWidth(el: HTMLElement) {
-  const style = getComputedStyle(el);
+  const style = getComputedStyle(el)
 
   return (
     el.offsetWidth +
     (parseInt(style.marginLeft, 10) || 0) +
     (parseInt(style.marginRight, 10) || 0)
-  );
+  )
 }
 
 export function updateNodes(
@@ -181,22 +189,22 @@ export function updateNodes(
   infinite: boolean
 ): Item[] {
   if (prevChildren && prevChildren.length < newItems.length) {
-    return initItems(newItems, slide, infinite);
+    return initItems(newItems, slide, infinite)
   }
 
   const matchedItems = oldItems.map((oldItem) => {
-    return newItems.find((newItem) => oldItem.key === newItem.key) as Item;
-  });
+    return newItems.find((newItem) => oldItem.key === newItem.key) as Item
+  })
 
   if (areItemsNotMatched(matchedItems)) {
-    return initItems(newItems, slide, infinite);
+    return initItems(newItems, slide, infinite)
   }
 
-  return matchedItems;
+  return matchedItems
 }
 
 export function areItemsNotMatched(items: Item[]): boolean {
-  return items.some((item) => item === undefined);
+  return items.some((item) => item === undefined)
 }
 
 export const getStartIndex = (
@@ -205,14 +213,12 @@ export const getStartIndex = (
   items: any[]
 ): number => {
   const startIndex =
-    start + slide >= items.length
-      ? start + slide - items.length
-      : start + slide;
+    start + slide >= items.length ? start + slide - items.length : start + slide
   if (startIndex < 0) {
-    return items.length + startIndex;
+    return items.length + startIndex
   }
-  return startIndex;
-};
+  return startIndex
+}
 
 export const rotateNavigationItems = (
   items: any[],
@@ -222,33 +228,33 @@ export const rotateNavigationItems = (
   slide: number,
   direction: SlideDirection
 ): any[] => {
-  const startIndex = getStartIndex(start, slide, items);
-  const current = Math.floor(showingItems.length / 2);
-  const circular = new Circular(items, startIndex);
-  const newItems: any[] = Array.from(showingItems);
+  const startIndex = getStartIndex(start, slide, items)
+  const current = Math.floor(showingItems.length / 2)
+  const circular = new Circular(items, startIndex)
+  const newItems: any[] = Array.from(showingItems)
 
   switch (+direction) {
     case SlideDirection.Left:
       for (let i = 0; i < current; i++) {
-        const idx = current - (Math.abs(slide) + i) - show;
+        const idx = current - (Math.abs(slide) + i) - show
         if (idx < 0 || !newItems[idx]) {
-          newItems.unshift(circular.current());
+          newItems.unshift(circular.current())
         }
-        circular.prev();
+        circular.prev()
       }
-      break;
+      break
     case SlideDirection.Right:
       for (let i = 0; i < current; i++) {
         if (!newItems[current + slide + i + show]) {
-          newItems.push(circular.current());
+          newItems.push(circular.current())
         }
-        circular.next();
+        circular.next()
       }
-      break;
+      break
   }
 
-  return newItems;
-};
+  return newItems
+}
 
 export const getNavigationSlideAmount = (
   target: number | undefined,
@@ -258,11 +264,11 @@ export const getNavigationSlideAmount = (
 ): number => {
   if (typeof target === 'number') {
     if (direction === SlideDirection.Right) {
-      return target - next + 1;
+      return target - next + 1
     }
 
-    return slideAmount;
+    return slideAmount
   }
 
-  return direction * -1;
-};
+  return direction * -1
+}

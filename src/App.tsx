@@ -1,53 +1,57 @@
-import React, { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import './App.css';
+import './App.css'
 
-import { Carousel } from 'components';
-
-interface IHighlight {
-  children: React.ReactNode;
-  color: string;
-}
-
-const Highlight = ({ children, color }: IHighlight) => (
-  <span
-    style={{
-      backgroundColor: color,
-      borderRadius: '2px',
-      color: '#fff',
-      padding: '90px 0',
-      display: 'block',
-      height: '200px',
-      margin: '16px 16px 16px 0',
-    }}
-  >
-    {' '}
-    {children}{' '}
-  </span>
-);
+import { Carousel as OwnCarousel } from 'components'
+import { Carousel } from '@trendyol-js/react-carousel'
 
 function App() {
   return (
-    <div className="App">
-      <Carousel
-        className={'exampleCarousel1'}
-        show={3.5}
-        slide={3}
-        swiping={true}
-      >
-        <Highlight color="#2d66c3">We love Web 🌐</Highlight>
-        <Highlight color="#f44336">We love Developers 👩🏻‍</Highlight>
-        <a target="_blank" href="https://github.com/trendyol/">
-          <Highlight color="#d53f8c">This is our github</Highlight>
-        </a>
-        <a target="_blank" href="https://trendyol.com/">
-          <Highlight color="#f27a1a">This is our website</Highlight>
-        </a>
-        <Highlight color="#16be48">We love Trendyol green</Highlight>
-        <Highlight color="#f27a1a">We love Trendyol orange</Highlight>
-      </Carousel>
+    <div className='app'>
+      <div className='app-container'>
+        <Carousel
+          show={3}
+          slide={3}
+          swiping={true}
+          className='slider'
+          hideArrows={true}
+        >
+          <div className='slide'>Slide 1</div>
+          <div className='slide'>Slide 2</div>
+          <div className='slide'>Slide 3</div>
+          <div className='slide'>Slide 4</div>
+          <div className='slide'>Slide 5</div>
+          <div className='slide'>Slide 6</div>
+          <div className='slide'>Slide 7</div>
+          <div className='slide'>Slide 8</div>
+          <div className='slide'>Slide 9</div>
+          <div className='slide'>Slide 10</div>
+          <div className='slide'>Slide 11</div>
+          <div className='slide'>Slide 12</div>
+        </Carousel>
+      </div>
+      <div className='app-container'>
+        <OwnCarousel
+          show={3}
+          slide={3}
+          swiping={true}
+          className='slider'
+          hideArrows={true}
+        >
+          <div className='slide'>Slide 1</div>
+          <div className='slide'>Slide 2</div>
+          <div className='slide'>Slide 3</div>
+          <div className='slide'>Slide 4</div>
+          <div className='slide'>Slide 5</div>
+          <div className='slide'>Slide 6</div>
+          <div className='slide'>Slide 7</div>
+          <div className='slide'>Slide 8</div>
+          <div className='slide'>Slide 9</div>
+          <div className='slide'>Slide 10</div>
+          <div className='slide'>Slide 11</div>
+          <div className='slide'>Slide 12</div>
+        </OwnCarousel>
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

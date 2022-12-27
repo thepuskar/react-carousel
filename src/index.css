@@ -26,15 +26,8 @@ a:hover {
 
 body {
   margin: 0;
+  padding: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
 }
 .carousel-base {
   width: 100%;
@@ -63,67 +56,8 @@ h1 {
 .carousel-arrow {
   z-index: 1;
 }
-
-.sliderBase {
-  width: 100%;
-  position: relative;
-}
-
-.slider {
-  display: flex;
-  overflow-x: auto;
-  scrollbar-width: none; /* Firefox 64 */
-  -ms-overflow-style: none; /* Internet Explorer 11 */
-}
-
-.slider::-webkit-scrollbar {
-  /** WebKit */
-  display: none;
-}
-
-.slider > * {
-  flex: 0 0 auto;
-}
-
-.sliding > * {
-  pointer-events: none;
-}
-
 .carousel-navigation {
   display: flex;
   position: absolute;
   bottom: 0;
 }
-
-.exampleCarousel1 {
-  border: 2px solid red;
-}
-
-/* .exampleCarousel1 div > button[data-direction='left'] {
-  background: url('https://cdn.dsmcdn.com/web/production/slick-arrow.svg')
-    no-repeat center;
-  transform: rotateZ(180deg);
-  outline: none;
-  border: none;
-  cursor: pointer;
-  position: relative;
-  left: -16px;
-  height: 80px;
-  top: 80px;
-}
-
-.exampleCarousel1 div > button[data-direction='right'] {
-  background: url('https://cdn.dsmcdn.com/web/production/slick-arrow.svg')
-    no-repeat center;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  position: relative;
-  right: -16px;
-  height: 80px;
-  top: 80px;
-}
-
-.exampleCarousel1 div:first-child {
-  text-align: center;
-} */

@@ -162,11 +162,25 @@ export const initItems = (
   return newArray
 }
 
-export function getPageX(e: TouchEvent | MouseEvent | undefined | any): number {
-  if (e.nativeEvent instanceof MouseEvent) {
-    return e.nativeEvent.pageX
-  } else if (e.nativeEvent instanceof TouchEvent) {
-    return e.nativeEvent.changedTouches[0].pageX
+function isTouchEvent(
+  e: React.TouchEvent | React.MouseEvent
+): e is React.TouchEvent {
+  return e && 'touches' in e
+}
+
+function isMouseEvent(
+  e: React.TouchEvent | React.MouseEvent
+): e is React.MouseEvent {
+  return e && 'screenX' in e
+}
+
+export function getPageX(event: TouchEvent | MouseEvent): number {
+  event.persist()
+  if (isTouchEvent(event)) {
+    return event.nativeEvent.changedTouches[0].pageX
+  }
+  if (isMouseEvent(event)) {
+    return event.nativeEvent.pageX
   }
   return 0
 }

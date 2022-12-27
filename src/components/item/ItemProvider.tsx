@@ -37,7 +37,7 @@ export const ItemProvider: FunctionComponent<ItemProviderProps> = (
     finished: true,
     pointers: true
   })
-  console.log('drag', drag)
+
   const handleDragStart = (e: MouseEvent | TouchEvent) => {
     e.persist()
     setDrag({

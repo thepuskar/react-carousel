@@ -3,19 +3,22 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border: 2px solid red;
+
+  min-height: 100vh;
 }
 .app-container {
   max-width: 780px;
   width: 100%;
-  min-height: 100vh;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  flex-direction: column;
   padding: 0.5rem;
   border-radius: 0.2rem;
 }
-.scroll-slider {
+
+.scroll-slider,
+.swipe-slider {
   border: 1px solid #d4d4d4;
   padding: 0.5rem;
   border-radius: 0.4rem;
@@ -23,7 +26,8 @@
 .scroll-slider div {
   margin: 0 0.5rem;
 }
-.item {
+.item,
+.swipe-item {
   background-color: #d4d4d4;
   border-radius: 0.4rem;
   color: #000;
@@ -42,4 +46,7 @@
 }
 .item:last-child {
   margin-right: 0;
+}
+.swipe-slider.item-container {
+  border: 2px solid red;
 }

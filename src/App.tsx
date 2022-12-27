@@ -1,32 +1,36 @@
 import './App.css'
 
-import { Carousel as OwnCarousel } from 'components'
-import { Carousel } from '@trendyol-js/react-carousel'
+import { ScrollingCarousel } from 'components'
 
 function App() {
+  const items = [
+    'Slide 1',
+    'Slide 2',
+    'Slide 3',
+    'Slide 4',
+    'Slide 5',
+    'Slide 6',
+    'Slide 7',
+    'Slide 8',
+    'Slide 9',
+    'Slide 10',
+    'Slide 11',
+    'Slide 12'
+  ]
   return (
     <div className='app'>
       <div className='app-container'>
-        <OwnCarousel
-          show={3}
-          slide={3}
-          swiping={true}
-          className='slider'
-          hideArrows={true}
+        <ScrollingCarousel
+          className='scroll-slider'
+          rightIcon={<></>}
+          leftIcon={<></>}
         >
-          <div className='slide'>Slide 1</div>
-          <div className='slide'>Slide 2</div>
-          <div className='slide'>Slide 3</div>
-          <div className='slide'>Slide 4</div>
-          <div className='slide'>Slide 5</div>
-          <div className='slide'>Slide 6</div>
-          <div className='slide'>Slide 7</div>
-          <div className='slide'>Slide 8</div>
-          <div className='slide'>Slide 9</div>
-          <div className='slide'>Slide 10</div>
-          <div className='slide'>Slide 11</div>
-          <div className='slide'>Slide 12</div>
-        </OwnCarousel>
+          {items?.map((item) => (
+            <div className='item' key='item'>
+              {item}
+            </div>
+          ))}
+        </ScrollingCarousel>
       </div>
     </div>
   )
